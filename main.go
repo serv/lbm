@@ -99,10 +99,28 @@ func main() {
 		// err := cmd.Run()
 		// os.Chdir(mapNumber[argument])
 		// sh.Command(sh.Dir(mapNumber[argument])).Run()
-		// TODO: need to write instructure on how to run this
 		fmt.Println(mapNumber[argument])
 	} else if command == "rm" {
-		// TODO: Able to remove
+		var buffer bytes.Buffer
+
+		if _, ok := mapNumber[argument]; !ok {
+			return
+		}
+
+		delete(mapNumber, argument)
+		os.Remove(dumpName)
+		for tempNumber, tempDir := range mapNumber {
+			buffer.WriteString(tempNumber)
+			buffer.WriteString(",")
+			buffer.WriteString(tempDir)
+			buffer.WriteString("\n")
+		}
+
+		added := []byte(buffer.String())
+
+		f, _ := os.OpenFile(dumpName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		f.Write(added)
+		f.Close()
 	} else if command == "ls" {
 
 		if lineSplitted[0] == "" {
