@@ -24,13 +24,12 @@ A simple bookmark manager for terminal.
       $ lbm ls
 ```
 
-## About
-
 ## How it works
 
-## Development
-
-### Running tests
+Local Bookmark uses a plain text file named `.lbm_dump` to store
+bookmarks in CSV format. Each line in the data file represent an instance
+of a bookmark. A bookmark instance consists of two attributes, a ID and a
+directory location.
 
 ## License
 
